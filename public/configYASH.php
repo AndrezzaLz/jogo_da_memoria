@@ -1,11 +1,21 @@
+<?php
+session_start();
+
+#segurança: impede que o usuario acesse a pagina sem ser vindo do login.php e não deixa carregar a pagina
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: login.php");
+    exit; 
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configurar Partida - YASH</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/configYASH.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/configYASH.css">
 
     <!-- Estilização do Favicon do site -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
@@ -16,10 +26,9 @@
 <body>
     
     <div class="container">
-        <img src="img/logoYASH.png" alt="YASH">
-
-        <!-- Quando adicionar a parte do JavaScript trocar o form para action='jogoYASH.php' method='post' -->
-        <form id="config-form" action="jogoYASH.html" method="get">
+        <img src="assets/img/logoYASH.png" alt="YASH">
+        
+        <form id="config-form" action="jogoYASH.php" method="POST">
 
             <div class="config-group">
                 <label class="config-title">Modo de Jogo</label>
@@ -68,9 +77,9 @@
     </div>
 
     <div class="nav-secundaria">
-        <a href="ranking.html">Ranking</a> |
-        <a href="configuracoes_p.html">Configurações</a> |
-        <a href="login.html">Sair</a>
+        <a href="ranking.php">Ranking</a> |
+        <a href="configuracoes_p.php">Configurações</a> |
+        <a href="logout.php">Sair</a>
     </div>
 </body>
 </html>

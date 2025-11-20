@@ -1,7 +1,5 @@
-// js/jogoYASH.js
-
 document.addEventListener('DOMContentLoaded', () => {
-    // --- ELEMENTOS DO DOM ---
+    //ELEMENTOS DO DOM
     const gameBoard = document.querySelector('.game-board');
     const boardConfigDisplay = document.querySelector('.board-config');
     const movesDisplay = document.querySelector('.moves');
@@ -9,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const classicModeBtn = document.querySelector('.mode-toggle .mode-btn:nth-child(1)');
     const timeTrialBtn = document.querySelector('.mode-toggle .mode-btn:nth-child(2)');
     
-    // --- NOVO: Botões de Trapaça ---
+    //Botões de Trapaça 
     const activateCheatBtn = document.querySelector('.cheat-button.on');
     const deactivateCheatBtn = document.querySelector('.cheat-button.off');
 
@@ -18,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalMessage = document.querySelector('#modalMessage');
     const playAgainBtn = document.querySelector('#playAgainBtn');
 
-    // --- VARIÁVEIS DE ESTADO DO JOGO ---
+    //VARIÁVEIS DE ESTADO DO JOGO
     let hasFlippedCard = false;
     let lockBoard = false;
     let firstCard, secondCard;
@@ -40,14 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const taylorSwiftImages = [
-        'img/jogotay/1989.png', 'img/jogotay/1989tv.png', 'img/jogotay/apeak(2).png', 'img/jogotay/apeak.png',
-        'img/jogotay/eras.png', 'img/jogotay/evermore.png', 'img/jogotay/fearless.png', 'img/jogotay/folklore.png',
-        'img/jogotay/louro.png', 'img/jogotay/loverset.png', 'img/jogotay/midnights.png', 'img/jogotay/movie.png',
-        'img/jogotay/palco.png', 'img/jogotay/paula.png', 'img/jogotay/piano.png', 'img/jogotay/red.png',
-        'img/jogotay/redtv.png', 'img/jogotay/reputacion.png', 'img/jogotay/Showgirl.png', 'img/jogotay/speaknow.png',
-        'img/jogotay/speaknowtv.png', 'img/jogotay/taybrina.png', 'img/jogotay/tayed.png', 'img/jogotay/tayflorence.png',
-        'img/jogotay/TTPD.png', 'img/jogotay/TTPD2.png', 'img/jogotay/debut.png', 'img/jogotay/fearlesstv.png', 
-        'img/jogotay/friendship.png', 'img/jogotay/hands.png', 'img/jogotay/lover-album.png', 'img/jogotay/mirrorball.png', 
+        'assets/img/jogotay/1989.png', 'assets/img/jogotay/1989tv.png', 'assets/img/jogotay/apeak(2).png', 'assets/img/jogotay/apeak.png',
+        'assets/img/jogotay/eras.png', 'assets/img/jogotay/evermore.png', 'assets/img/jogotay/fearless.png', 'assets/img/jogotay/folklore.png',
+        'assets/img/jogotay/louro.png', 'assets/img/jogotay/loverset.png', 'assets/img/jogotay/midnights.png', 'assets/img/jogotay/movie.png',
+        'assets/img/jogotay/palco.png', 'assets/img/jogotay/paula.png', 'assets/img/jogotay/piano.png', 'assets/img/jogotay/red.png',
+        'assets/img/jogotay/redtv.png', 'assets/img/jogotay/reputacion.png', 'assets/img/jogotay/Showgirl.png', 'assets/img/jogotay/speaknow.png',
+        'assets/img/jogotay/speaknowtv.png', 'assets/img/jogotay/taybrina.png', 'assets/img/jogotay/tayed.png', 'assets/img/jogotay/tayflorence.png',
+        'assets/img/jogotay/TTPD.png', 'assets/img/jogotay/TTPD2.png', 'assets/img/jogotay/debut.png', 'assets/img/jogotay/fearlesstv.png', 
+        'assets/img/jogotay/friendship.png', 'assets/img/jogotay/hands.png', 'assets/img/jogotay/lover-album.png', 'assets/img/jogotay/mirrorball.png',
     ]
 
     let contentSource = [];
@@ -55,10 +53,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- FUNÇÕES DE CONFIGURAÇÃO E INICIALIZAÇÃO ---
 
     function getGameSettings() {
-        const params = new URLSearchParams(window.location.search);
-        const sizeParam = params.get('tamanho_tabuleiro') || '4x4';
-        gameMode = params.get('modo_jogo') || 'classico';
-        cardTheme = params.get('card_theme') || 'frutas';
+        const config = (typeof CONFIG_JOGO !== 'undefined') ? CONFIG_JOGO : {
+            modo: 'classico',
+            tema: 'frutas',
+            tamanho: '4x4'
+        };
+
+        const sizeParam = config.tamanho;
+        gameMode = config.modo;
+        cardTheme = config.tema;
+
+        console.log("Iniciando jogo com: ", config);
 
         if (cardTheme === 'taylor_swift') {
             contentSource = taylorSwiftImages;
@@ -69,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         boardConfigDisplay.textContent = sizeParam;
         const size = parseInt(sizeParam.split('x')[0]);
         totalPairs = (size * size) / 2;
-        
+
         if (gameMode === 'contra_tempo') {
             classicModeBtn.classList.remove('active');
             timeTrialBtn.classList.add('active');
@@ -81,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 case '8x8': totalTimeInSeconds = 240; break;
                 default: totalTimeInSeconds = 120;
             }
+
         } else {
             classicModeBtn.classList.add('active');
             timeTrialBtn.classList.remove('active');
@@ -112,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (cardTheme === 'taylor_swift') {
                 const frontFace = card.querySelector('.front');
-                frontFace.style.backgroundImage = "url('img/jogotay/carta.png')"
+                frontFace.style.backgroundImage = "url('assets/img/jogotay/carta.png')"
                 frontFace.style.backgroundSize = "cover";
                 frontFace.style.backgroundPosition = "center";
             }
@@ -131,6 +137,14 @@ document.addEventListener('DOMContentLoaded', () => {
             totalTimeInSeconds = 0;
             timerInterval = setInterval(tickUp, 1000);
         } else if (gameMode === 'contra_tempo') {
+            const sizeParam = boardConfigDisplay.textContent;
+             switch (sizeParam) {
+                case '2x2': totalTimeInSeconds = 60; break;
+                case '4x4': totalTimeInSeconds = 120; break;
+                case '6x6': totalTimeInSeconds = 180; break;
+                case '8x8': totalTimeInSeconds = 240; break;
+                default: totalTimeInSeconds = 120;
+            }
             timerInterval = setInterval(tickDown, 1000);
         }
         updateTimerDisplay();
@@ -159,8 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(timerInterval);
     }
 
-    // --- FUNÇÕES DE LÓGICA DO JOGO ---
-
+    //Funções do Jogo
     function flipCard() {
         if (lockBoard || this === firstCard) return;
         this.classList.add('flip');
@@ -185,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
         firstCard.removeEventListener('click', flipCard);
         secondCard.removeEventListener('click', flipCard);
 
-        // --- MODIFICADO: Adiciona a classe .matched ---
         firstCard.classList.add('matched');
         secondCard.classList.add('matched');
         
@@ -220,7 +232,9 @@ document.addEventListener('DOMContentLoaded', () => {
         stopTimer();
         lockBoard = true;
 
-        // Adiciona um delay para o jogador ver a última carta virar
+        const textoResultado = didWin ? 'Vitória' : 'Derrota';
+        salvarPartidaNoBanco(textoResultado);
+        
         setTimeout(() => {
             if (didWin) {
                 modalTitle.textContent = 'Parabéns, Você Venceu!';
@@ -232,8 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
             endGameModal.classList.add('show'); // Mostra o pop-up
         }, 700); //Aumentei um pouco o tempo para dar tempo da animação da carta
     }
-
-    // --- NOVO: Funções de Trapaça ---
 
     function activateCheat() {
         const allCards = document.querySelectorAll('.card');
@@ -252,22 +264,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function restartGame() {
+        hasFlippedCard = false;
+        lockBoard = false;
+        firstCard = null;
+        secondCard = null;
+        moves = 0;
+        pairsFound = 0;
+        movesDisplay.textContent = moves;
 
-    // --- INICIALIZAÇÃO DO JOGO ---
+        endGameModal.classList.remove('show');
+
+        createBoard();
+        startTimer();
+    }
+
     function init() {
         getGameSettings();
         createBoard();
         startTimer();
 
-        // --- NOVO: Event Listeners para os botões de trapaça ---
         activateCheatBtn.addEventListener('click', activateCheat);
         deactivateCheatBtn.addEventListener('click', deactivateCheat);
 
         playAgainBtn.addEventListener('click', (e) => {
             e.preventDefault(); // Impede que o link '#' recarregue a página de forma padrão
-            window.location.reload(); // Recarrega a página com os mesmos parâmetros
+            restartGame();
         });
     }
 
+    function salvarPartidaNoBanco(resultado) {
+        const dadosDaPartida = {
+            dimensoes: boardConfigDisplay.textContent,
+            modalidade: gameMode === 'classico' ? 'Clássica' : 'Contra o Tempo',
+            tempo: timerDisplay.textContent,
+            jogadas: moves,
+            resultado: resultado
+        };
+
+        fetch('salvar_partida.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosDaPartida)
+        })
+        .then(response => responde.json())
+        .then(data => {
+            console.log('Partida salva com sucesso', data);
+        })
+        .catch(error => {
+            console.error('Erro ao salvar partida: ', error);
+        });
+    }
     init();
 });
