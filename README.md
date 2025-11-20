@@ -1,7 +1,7 @@
-===================================================================
+-------------------------------------------------------------------
 PROJETO YASH - JOGO DA MEMÓRIA (WEB DEVELOPMENT)
 Guia de Instalação e Execução Local
-===================================================================
+-------------------------------------------------------------------
 
 Este arquivo contém o passo a passo para configurar o ambiente, 
 o banco de dados e executar o projeto em uma máquina local usando XAMPP.
@@ -72,6 +72,6 @@ o usuário administrador já criado pelo script de banco de dados:
 Login: admin
 Senha: 123456
 
-===================================================================
+-------------------------------------------------------------------
 Desenvolvido para a disciplina de Programação para a Web.
-===================================================================
+-------------------------------------------------------------------
