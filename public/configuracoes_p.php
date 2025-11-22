@@ -62,7 +62,7 @@ $stmt->bindValue(':id', $usuarioId);
 $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Nota: Precisaremos criar a tabela 'partidas' no futuro
+// Nota: Precisamos criar a tabela 'partidas' no futuro
 try {
     $sqlHist = "SELECT dimensoes, modalidade, tempo, jogadas, resultado, data_partida 
                 FROM partidas 
@@ -119,7 +119,6 @@ try {
             </nav>
 
             <div class="conteudo-container">
-                
                 <section id="info-pessoais" class="conteudo-aba">
                     <h2>Informações Pessoais</h2>
 
@@ -166,36 +165,38 @@ try {
                 <section id="historico" class="conteudo-aba">
                     <h2>Seu Histórico de Partidas</h2>
                     
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Dimensões</th>
-                                <th>Modalidade</th>
-                                <th>Tempo</th>
-                                <th>Jogadas</th>
-                                <th>Resultado</th>
-                                <th>Data</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (count($historico) > 0): ?>
-                                <?php foreach ($historico as $partida): ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($partida['dimensoes']) ?></td>
-                                        <td><?= htmlspecialchars($partida['modalidade']) ?></td>
-                                        <td><?= htmlspecialchars($partida['tempo']) ?></td>
-                                        <td><?= htmlspecialchars($partida['jogadas']) ?></td>
-                                        <td><?= htmlspecialchars($partida['resultado']) ?></td>
-                                        <td><?= date('d/m/Y H:i', strtotime($partida['data_partida'])) ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
+                    <div class="tabela-container">
+                        <table>
+                            <thead>
                                 <tr>
-                                    <td colspan="6" style="text-align:center">Você ainda não jogou nenhuma partida.</td>
+                                    <th>Dimensões</th>
+                                    <th>Modalidade</th>
+                                    <th>Tempo</th>
+                                    <th>Jogadas</th>
+                                    <th>Resultado</th>
+                                    <th>Data</th>
                                 </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php if (count($historico) > 0): ?>
+                                    <?php foreach ($historico as $partida): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($partida['dimensoes']) ?></td>
+                                            <td><?= htmlspecialchars($partida['modalidade']) ?></td>
+                                            <td><?= htmlspecialchars($partida['tempo']) ?></td>
+                                            <td><?= htmlspecialchars($partida['jogadas']) ?></td>
+                                            <td><?= htmlspecialchars($partida['resultado']) ?></td>
+                                            <td><?= date('d/m/Y H:i', strtotime($partida['data_partida'])) ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" style="text-align:center">Você ainda não jogou nenhuma partida.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </div>
         </div>

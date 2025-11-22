@@ -55,7 +55,8 @@ try {
             
             <h1>Histórico de <?= htmlspecialchars($nomeUsuario) ?></h1>
             
-            <div class="table-responsive"> <table>
+            <div class="table-responsive"> 
+                <table>
                     <thead>
                         <tr>
                             <th>Dimensões</th>
