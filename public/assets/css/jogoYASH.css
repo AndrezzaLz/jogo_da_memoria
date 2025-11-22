@@ -197,11 +197,14 @@
     padding: 20px;
     border-radius: 10px;
     margin: 0 auto; 
+    max-width: 95vw;
+    width: fit-content;
+    box-sizing: border-box;
 }
 
 .card {
-    width: clamp(35px, 12vmin, 100px);
-    height: clamp(35px, 12vmin, 100px);
+    width: clamp(30px, 12vmin, 100px);
+    height: clamp(30px, 12vmin, 100px);
     background-color: var(--dark-blue-3);
     border-radius: 10px;
     display: flex;
@@ -226,11 +229,22 @@
     .cheat-button { padding: 6px 8px; font-size: 0.95em; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 850px) {
+    .card {
+        width: clamp(24px, 9vmin, 80px);
+        height: clamp(24px, 9vmin, 80px);
+        border-width: 1px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 450px) {
     .game-board {
         gap: 5px;
         padding: 10px;
+        max-width: 98vw;
     }
+
     header { flex-direction: column; gap: 10px; padding: 20px 12px; min-height: auto; }
     .match-panel {
         position: static;

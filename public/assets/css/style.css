@@ -223,6 +223,11 @@ body {
     font-weight: bold;
 }
 
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
 .nav-secundaria a:hover {
     text-decoration: underline;
 }

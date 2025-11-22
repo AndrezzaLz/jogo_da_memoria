@@ -51,6 +51,7 @@
 
 #historico table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
     font-size: 0.95rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -80,4 +81,9 @@
     margin-bottom: 1.5rem; 
     text-align: center;     
     color: #003566;      
+}
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
 }
