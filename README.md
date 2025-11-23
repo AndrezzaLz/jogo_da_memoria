@@ -5,6 +5,10 @@ Guia de Instalação e Execução Local
 
 Este arquivo contém o passo a passo para configurar o ambiente, 
 o banco de dados e executar o projeto em uma máquina local usando XAMPP.
+-------------------------------------------------------------------
+0. LINK PARA O VÍDEO HOSPEDADO NO YOUTUBE
+-------------------------------------------------------------------
+1. Acessar o link: https://youtu.be/Gu98UMdQDZM
 
 -------------------------------------------------------------------
 1. PRÉ-REQUISITOS
@@ -75,3 +79,4 @@ Senha: 123456
 -------------------------------------------------------------------
 Desenvolvido para a disciplina de Programação para a Web.
 -------------------------------------------------------------------
+
